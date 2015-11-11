@@ -41,7 +41,6 @@ public class PasswordReset extends HttpServlet {
             }
             session.setAttribute("user", user);
             request.setAttribute("message", message);
-            session.setAttribute("password", password);
         }
         getServletContext()
                 .getRequestDispatcher(url)

@@ -32,11 +32,9 @@ public class NewCustomerServlet extends HttpServlet {
             String state = request.getParameter("state");
             String zip = request.getParameter("zip");
             String email = request.getParameter("email");
-            String username = (request.getParameter("lastName")+request.getParameter("zip"));
-            String password = "welcome1";
             
             // store data in User object
-            User user = new User(firstName, lastName, phone, address, city, state, zip,email, username, password);
+            User user = new User(firstName, lastName, phone, address, city, state, zip,email);
             
             // validate
             String message = "";
@@ -54,7 +52,6 @@ public class NewCustomerServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             request.setAttribute("message", message);
-            request.setAttribute("password", password);
         }
         getServletContext()
                         .getRequestDispatcher(url)

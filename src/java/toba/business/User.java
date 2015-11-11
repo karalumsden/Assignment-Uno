@@ -24,14 +24,12 @@ public class User implements Serializable {
         state = "";
         zip = "";
         email = "";
-        username = "";
-        password = "";
-        username = "";
-        password = "";
+        username = lastName + zip;
+        password = "welcome1";
     }
 
     public User(String firstName, String lastName, String phone, String address, 
-            String city, String state, String zip, String email, String username, String password) {
+            String city, String state, String zip, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
@@ -40,8 +38,8 @@ public class User implements Serializable {
         this.state = state;
         this.zip = zip;
         this.email = email;
-        this.username = username;
-        this.password = password;
+        username = lastName + zip;
+        password = "welcome1";
     }
 
     public String getFirstName() {

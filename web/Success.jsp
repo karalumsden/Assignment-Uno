@@ -47,10 +47,10 @@
               <th>Email: </th><td>${sessionScope.user.email}</td>
           </tr>
           <tr>
-              <th>Username: </th><td>${sessionScope.user.username}</td>
+              <th>Username: </th><td>${user.username}</td>
           </tr>
           <tr>
-              <th>Password: </th><td>${sessionScope.user.password}</td>
+              <th>Password: </th><td>${user.password}</td>
           </tr>
      </table>
      </div>
