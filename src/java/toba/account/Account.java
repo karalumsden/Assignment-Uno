@@ -37,34 +37,12 @@ public class Account implements Serializable {
         this.savings = savings;
     }
 
-    public static void credit(account) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        trans.begin();
-        try {
-            em.persist(user);
-            trans.commit();
-        } catch (Exception e) {
-            System.out.println(e);
-            trans.rollback();
-        } finally {
-            em.close();
-        }
+    public static void credit(balance) {
+        
     }
 
-    public static void debit(user) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        trans.begin();
-        try {
-            em.remove(em.merge(user));
-            trans.commit();
-        } catch (Exception e) {
-            System.out.println(e);
-            trans.rollback();
-        } finally {
-            em.close();
-        }
+    public static void debit(balance) {
+ 
     }
 
     public Long getAccountId() {
