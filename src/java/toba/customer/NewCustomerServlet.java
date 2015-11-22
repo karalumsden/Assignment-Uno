@@ -59,8 +59,9 @@ public class NewCustomerServlet extends HttpServlet {
                 UserDB.insert(user);
             }
             
-          
-            request.setAttribute("user", user);
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            session.setAttribute("account", account);
             request.setAttribute("message", message);
         }
         getServletContext()

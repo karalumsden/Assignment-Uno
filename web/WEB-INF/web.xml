@@ -24,6 +24,16 @@
     </servlet-mapping>
     
     <servlet>
+        <servlet-name>TransactionServlet</servlet-name>
+        <servlet-class>toba.transaction.TransactionServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>TransactionServlet</servlet-name>
+        <url-pattern>/transfer</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
         <servlet-name>PasswordReset</servlet-name>
         <servlet-class>toba.password.PasswordReset</servlet-class>
     </servlet>
