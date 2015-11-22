@@ -4,6 +4,7 @@ package toba.customer;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+
 import toba.data.UserDB;
 import toba.business.User;
 
@@ -34,15 +35,8 @@ public class NewCustomerServlet extends HttpServlet {
             String email = request.getParameter("email");
             
             // store data in User object
-            User user = new User();
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setLastName(phone);
-            user.setLastName(address);
-            user.setLastName(city);
-            user.setLastName(state);
-            user.setLastName(zip);
-            user.setEmail(email);
+            User user = new User(firstName, lastName, phone, address, city, state, zip, email);
+           
                        
             // validate
             String message = "";

@@ -11,7 +11,7 @@ public class User implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userID;
+    private Long userId;
     private String firstName;
     private String lastName;
     private String phone;
@@ -23,13 +23,39 @@ public class User implements Serializable {
     private String username;
     private String password;
 
-    
-    public Long getUserID() {
-        return userID;
+    public User() {
+        firstName = "";
+        lastName = "";
+        phone = "";
+        address = "";
+        city = "";
+        state = "";
+        zip = "";
+        email = "";
+        username = lastName + zip;
+        password = "welcome1";
     }
 
-    public void setUserID(Long userId) {
-        this.userID = userId;
+    public User(String firstName, String lastName, String phone, String address, 
+            String city, String state, String zip, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.email = email;
+        username = lastName + zip;
+        password = "welcome1";
+    }
+    
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
