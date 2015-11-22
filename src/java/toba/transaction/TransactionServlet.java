@@ -5,28 +5,51 @@
  */
 package toba.transaction;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
-/**
- *
- * @author Lumsdens
- */
-@WebServlet(name = "TransactionServlet", urlPatterns = {"/TransactionServlet"})
+import toba.business.User;
+import toba.data.UserDB;
+import toba.account.Account;
+import toba.account.AccountDB;
+
 public class TransactionServlet extends HttpServlet {
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    }
+        String url = "/Transaction.jsp";
+        
+        // get current action
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "transfer"; // default action
+        }
 
+        if (action.equals("transfer")) {
+            url = "/Transaction.jsp"; 
+        } else if (action.equals("transferFunds")) {
+            // get properties
+            
+            
+            
+            // store data in object
+            Account account = new Account (user, balance, checking, savings);
+           
+                       
+            // validate
+            String message = "";
+          
+            
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            session.setAttribute("account", account);
+            request.setAttribute("message", message);
+        }
+        getServletContext()
+                        .getRequestDispatcher(url)
+                        .forward(request, response);
+    }
 }
+
