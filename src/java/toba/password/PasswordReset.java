@@ -5,6 +5,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import toba.business.User;
+import toba.data.UserDB;
 
 public class PasswordReset extends HttpServlet {
 
@@ -38,6 +39,7 @@ public class PasswordReset extends HttpServlet {
             } else {
                 user.setPassword(password);
                 url = "/Account_activity.jsp";
+                UserDB.update(user);
             }
             session.setAttribute("user", user);
             request.setAttribute("message", message);

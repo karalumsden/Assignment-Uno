@@ -85,7 +85,7 @@ color: #000000;
 
 .navbar-brand {padding-top: 5px;}
 
-#homeBanner {background: #fff url("/TOBA/img/bankBanner.jpg") center; height:300px;}
+#homeBanner {background: #fff url("../img/bankBanner.jpg") center; height:300px;}
 
 .error {color: red;}
 

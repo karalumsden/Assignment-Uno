@@ -4,6 +4,7 @@ package toba.customer;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import toba.data.UserDB;
 
 import toba.business.User;
 
@@ -47,6 +48,7 @@ public class NewCustomerServlet extends HttpServlet {
             else {
                 message = "";
                 url = "/Success.jsp";
+                UserDB.insert(user);
             }
             
             HttpSession session = request.getSession();
