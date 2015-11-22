@@ -41,17 +41,11 @@ public class PasswordReset extends HttpServlet {
                 url = "/Account_activity.jsp";
                 UserDB.update(user);
             }
-            session.setAttribute("user", user);
+            request.setAttribute("user", user);
             request.setAttribute("message", message);
         }
         getServletContext()
                 .getRequestDispatcher(url)
                 .forward(request, response);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doPost(request, response);
     }
 }

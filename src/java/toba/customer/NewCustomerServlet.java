@@ -5,8 +5,10 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import toba.data.UserDB;
 import toba.business.User;
+import toba.data.UserDB;
+import toba.account.Account;
+import toba.account.AccountDB;
 
 public class NewCustomerServlet extends HttpServlet {
 
@@ -33,9 +35,14 @@ public class NewCustomerServlet extends HttpServlet {
             String state = request.getParameter("state");
             String zip = request.getParameter("zip");
             String email = request.getParameter("email");
+            Double balance = 0.00;
+            Double checking = 0.00;
+            Double savings = 25.00;
+            
             
             // store data in User object
             User user = new User(firstName, lastName, phone, address, city, state, zip, email);
+            Account account = new Account (user, balance, checking, savings);
            
                        
             // validate
@@ -59,11 +66,5 @@ public class NewCustomerServlet extends HttpServlet {
         getServletContext()
                         .getRequestDispatcher(url)
                         .forward(request, response);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doPost(request, response);
     }
 }
