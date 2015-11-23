@@ -17,32 +17,29 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long accountId;
 
-    private enum accountType {
-        CHECKING, SAVINGS
-    };
+    public enum accountType {CHECKING, SAVINGS};
+    private accountType aName;
     private Double balance;
-    private Double checking;
-    private Double savings;
 
     public Account() {
         User user;
         balance = 0.00;
-        checking = 0.00;
-        savings = 0.00;
+        this.aName = aName;
     }
 
-    public Account(User user, Double balance, Double checking, Double savings) {
+    public Account(User user, Double balance, accountType aName) {
         this.balance = balance;
-        this.checking = checking;
-        this.savings = savings;
+        this.aName = aName;
     }
 
-    public static void credit(balance) {
-        
+    public static double credit(double balance) {
+        this.balance + balance = balance;
+        return balance;
     }
 
-    public static void debit(balance) {
- 
+    public static void debit(double balance) {
+        this.balance - balance = balance;
+        return balance;
     }
 
     public Long getAccountId() {
@@ -53,6 +50,14 @@ public class Account implements Serializable {
         this.accountId = accountId;
     }
 
+    public accountType getaName() {
+        return aName;
+    }
+
+    public void setaName(accountType aName) {
+        this.aName = aName;
+    }
+
     public Double getBalance() {
         return balance;
     }
@@ -60,5 +65,4 @@ public class Account implements Serializable {
     public void setBalance(Double balance) {
         this.balance = balance;
     }
-
 }
