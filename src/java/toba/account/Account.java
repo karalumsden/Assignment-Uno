@@ -2,8 +2,6 @@ package toba.account;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,29 +15,24 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long accountId;
 
-    public enum accountType {CHECKING, SAVINGS};
-    private accountType aName;
+    public enum AccountType {CHECKING, SAVINGS};
+    private AccountType aName;
     private Double balance;
+    private User user;
 
-    public Account() {
-        User user;
-        balance = 0.00;
-        this.aName = aName;
+
+    public Account(User user, AccountType type, double startingBalance) {
+        this.balance = startingBalance;
+        this.aName = type;
+        this.user = user;
     }
 
-    public Account(User user, Double balance, accountType aName) {
-        this.balance = balance;
-        this.aName = aName;
+    public void credit(double amt) {
+        this.balance += amt;
     }
 
-    public static double credit(double balance) {
-        this.balance + balance = balance;
-        return balance;
-    }
-
-    public static void debit(double balance) {
-        this.balance - balance = balance;
-        return balance;
+    public void debit(double amt) {
+        this.balance -= amt;
     }
 
     public Long getAccountId() {
@@ -50,12 +43,8 @@ public class Account implements Serializable {
         this.accountId = accountId;
     }
 
-    public accountType getaName() {
+    public AccountType getAccountType() {
         return aName;
-    }
-
-    public void setaName(accountType aName) {
-        this.aName = aName;
     }
 
     public Double getBalance() {

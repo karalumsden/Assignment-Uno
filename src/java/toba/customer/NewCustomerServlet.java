@@ -35,15 +35,12 @@ public class NewCustomerServlet extends HttpServlet {
             String state = request.getParameter("state");
             String zip = request.getParameter("zip");
             String email = request.getParameter("email");
-            Double balance = 0.00;
-            Double checking = 0.00;
-            Double savings = 25.00;
             
             
             // store data in User object
             User user = new User(firstName, lastName, phone, address, city, state, zip, email);
-            Account account = new Account (user, balance, checking, savings);
-           
+            Account checking = new Account(user, Account.AccountType.CHECKING, 25.00);
+            Account savings = new Account(user, Account.AccountType.SAVINGS, 0.00);
                        
             // validate
             String message = "";
@@ -61,7 +58,8 @@ public class NewCustomerServlet extends HttpServlet {
             
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            session.setAttribute("account", account);
+            session.setAttribute("account", checking);
+            session.setAttribute("account", savings);
             request.setAttribute("message", message);
         }
         getServletContext()
