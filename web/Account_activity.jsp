@@ -1,3 +1,4 @@
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/includes/header.html" />
 
@@ -16,7 +17,9 @@
     </div>
 
     <div class="container">
-      <p></p>
+
+        <!-- add a C:forEach here to display all transaction and account info?-->
+        
     </div> <!--end of container-->
 
 <c:import url="/includes/footer.jsp" />

@@ -11,31 +11,37 @@
 
 
 <div class="container border">
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <caption>Account Balance</caption>
-            <tr>
-                <th>Checking: $</th><td>${sessionScope.account.checking}</td>
-            </tr>
-            <tr>
-                <th>Savings: $</th><td>${sessionScope.account.savings}</td>
-            </tr>
-            <tr>
-                <th>Balance: $</th><td>${sessionScope.account.balance}</td>
-            </tr>
-        </table>
-        </div>   
-  </div> <!-- /container -->          
-            <p class="error"><i>${message}</i></p>
-            <form class="form-horizontal" action="transfer" method="post">
-                <input type="hidden" name="action" value="transferFunds">
-                <div class="form-group">
-                    <label for="transferAmount" class="control-label col-sm-2">Transfer Amount</label>
-                    <div class="col-sm-4">
-                        <input type="text" name="transferAmount" class="form-control" id="transferAmount" value="" placeholder="">
-                        <button type="submit" class="btn btn-primary btn-med">Transfer</button>
-                    </div>
-                </div>
-            </form>
+    <p class="error"><i>${message}</i></p>
+
+    <h1>Account Balance</h1>
+    <p>Please first select the account you would like to transfer funds to. Then, enter in the
+        amount of funds to transfer.</p>
+
+    <form class="form-inline" action="transfer" method="post">
+        <input type="hidden" name="action" value="transferFunds">
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="checking" id="checking">Checking:  ${account.AccountType.CHECKING}
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="savings" id="savings">Savings: ${account.AccountType.SAVINGS}
+                </label>
+            </div>
+            <h3>Balance:  ${account.balance}</h3>
+
+            <label class="sr-only" for="transferAmount">Amount (in dollars)</label>
+            <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input type="text" class="form-control" name="transferAmount" id="transferAmount" placeholder="Amount">
+                <div class="input-group-addon">.00</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Transfer cash</button>
+    </form>
+
+</div> <!-- /container -->          
 
 <c:import url="/includes/footer.jsp" />

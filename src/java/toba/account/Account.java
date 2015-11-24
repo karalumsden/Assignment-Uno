@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import toba.business.User;
-import toba.data.DBUtil;
+
 
 @Entity
 public class Account implements Serializable {

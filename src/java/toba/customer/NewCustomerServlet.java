@@ -39,8 +39,8 @@ public class NewCustomerServlet extends HttpServlet {
             
             // store data in User object
             User user = new User(firstName, lastName, phone, address, city, state, zip, email);
-            Account checking = new Account(user, Account.AccountType.CHECKING, 25.00);
-            Account savings = new Account(user, Account.AccountType.SAVINGS, 0.00);
+            Account checking = new Account(user, Account.AccountType.CHECKING, 0.00);
+            Account savings = new Account(user, Account.AccountType.SAVINGS, 25.00);
                        
             // validate
             String message = "";
@@ -54,6 +54,7 @@ public class NewCustomerServlet extends HttpServlet {
                 message = "";
                 url = "/Success.jsp";
                 UserDB.insert(user);
+                AccountDB.insert(checking, savings);
             }
             
             HttpSession session = request.getSession();
