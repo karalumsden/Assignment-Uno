@@ -17,21 +17,21 @@
     <p>Please first select the account you would like to transfer funds to. Then, enter in the
         amount of funds to transfer.</p>
 
-    <form class="form-inline" action="transfer" method="post">
+    <form action="transfer" method="post">
         <input type="hidden" name="action" value="transferFunds">
-        <div class="form-group">
+        
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="checking" id="checking">Checking:  ${account.AccountType.CHECKING}
+                    <input type="checkbox" name="checking" id="checking">Checking:&nbsp;&nbsp; ${account.AccountType.CHECKING}
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="savings" id="savings">Savings: ${account.AccountType.SAVINGS}
+                    <input type="checkbox" name="savings" id="savings">Savings:&nbsp;&nbsp; ${account.AccountType.SAVINGS}
                 </label>
             </div>
-            <h3>Balance:  ${account.balance}</h3>
-
+            <h3>Balance:&nbsp  ${account.balance}</h3>
+        <div class="form-group form-inline">
             <label class="sr-only" for="transferAmount">Amount (in dollars)</label>
             <div class="input-group">
                 <div class="input-group-addon">$</div>
@@ -39,7 +39,7 @@
                 <div class="input-group-addon">.00</div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Transfer cash</button>
+        <button type="submit" class="btn btn-primary">Transfer cash</button><br><br>
     </form>
 
 </div> <!-- /container -->          
