@@ -20,6 +20,7 @@ public class Account implements Serializable {
     private Double balance;
     private User user;
 
+    public Account(){}
 
     public Account(User user, AccountType type, double startingBalance) {
         this.balance = startingBalance;
