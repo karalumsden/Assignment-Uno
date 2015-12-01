@@ -13,7 +13,7 @@
 <div class="container border">
     <p class="error"><i>${message}</i></p>
 
-    <h1>Account Balance</h1>
+    <h1>Transfer Funds</h1>
     <p>Please enter in the amount of funds to transfer.</p>
 
     <form action="transfer" method="post">
