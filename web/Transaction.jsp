@@ -19,23 +19,10 @@
     <form action="transfer" method="post">
         <input type="hidden" name="action" value="transferFunds">
         <div class="form-group">
-            <label for="checking" class="control-label col-sm-2">Checking:  $</label>
-            <div class="col-sm-4">
-                <input type="text" name="checking" class="form-control" id="checking" value="${account.checking}" placeholder="">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="savings" class="control-label col-sm-2">Savings:  $</label>
-            <div class="col-sm-4">
-                <input type="text" name="savings" class="form-control" id="savings" value="${account.savings}" placeholder="">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="balance" class="control-label col-sm-2">Balance:  $</label>
-            <div class="col-sm-4">
-                <input type="text" name="balance" class="form-control" id="balance" value="${account.balance}" placeholder="">
-            </div>
-        </div>
+            <p>Checking:  ${account.aName.getBalance()}</p>
+            <p>Savings:  ${account.aName.getBalance()}</p>
+            <p>Balance:  ${account.balance}</p>
+            
         <div class="form-group form-inline">
             <label class="sr-only" for="transferAmount">Amount (in dollars)</label>
             <div class="input-group">
