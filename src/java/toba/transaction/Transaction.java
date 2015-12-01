@@ -14,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Id;
 
 import toba.business.User;
-import toba.account.Account;
 
 @Entity
 public class Transaction implements Serializable {
@@ -24,15 +23,23 @@ public class Transaction implements Serializable {
     private Long transactionId;
     
     @ManyToOne
-    private Account account;
+    private User user;
     
     @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
     private List<Transaction> transactionItems;
     
+    private Double transactionAmt;
+    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date transactionDate;
     
-    
+    public Transaction(){}
+
+    public Transaction(User user, Double transactionAmt, Date transactionDate) {
+        this.user = user;
+        this.transactionAmt = transactionAmt;
+        this.transactionDate = transactionDate;
+    }
 
     // Getters/Setters
     
@@ -44,14 +51,6 @@ public class Transaction implements Serializable {
         this.transactionId = transactionId;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
     public List<Transaction> getTransactionItems() {
         return transactionItems;
     }
@@ -60,6 +59,14 @@ public class Transaction implements Serializable {
         this.transactionItems = transactionItems;
     }
 
+    public Double getTransactionAmt() {
+        return transactionAmt;
+    }
+
+    public void setTransactionAmt(Double transactionAmt) {
+        this.transactionAmt = transactionAmt;
+    } 
+    
     public Date getTransactionDate() {
         return transactionDate;
     }

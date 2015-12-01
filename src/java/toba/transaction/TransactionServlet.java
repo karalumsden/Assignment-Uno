@@ -3,8 +3,8 @@ package toba.transaction;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-
 import toba.business.User;
+import toba.data.UserDB;
 import toba.account.Account;
 import toba.account.AccountDB;
 import toba.transaction.Transaction;
@@ -32,8 +32,10 @@ public class TransactionServlet extends HttpServlet {
             String transferAmount = request.getParameter("transferAmount");
             Double amt = Double.parseDouble(transferAmount);
             
-            // retrieve account objects for the user using Account DB????
-            // how to get and define the user?
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            Account account = (Account) session.getAttribute("account");
+            
             Transaction transaction = new Transaction();
             
             // transfer using the credit/debit methods 
@@ -46,7 +48,6 @@ public class TransactionServlet extends HttpServlet {
                 message = "Your debit transfer was successful.";
                 url = "/Account_activity.jsp";
                 // Can't figure out how to pass amt to the method keep getting an error?
-                // I don't understand how to pass the type that the user selected a checkbox for?
                 // Account.debit(amt);
                 // AccountDB.insert(checking, savings);
                 // Transaction.setTransactionItems(transaction);
@@ -61,12 +62,9 @@ public class TransactionServlet extends HttpServlet {
                 // Transaction.setTransactionItems(transaction);
                 // Transaction.setTransactionDate(Transaction.getTransactionDate());
             }
-            
-            
-            HttpSession session = request.getSession();
-            // session.setAttribute("user", user);
-            // session.setAttribute("account", checking);
-            // session.setAttribute("account", savings);
+            request.setAttribute("user", user);
+            request.setAttribute("account", account);
+            request.setAttribute("transaction", transaction);
             request.setAttribute("message", message);
         }
         getServletContext()

@@ -14,23 +14,28 @@
     <p class="error"><i>${message}</i></p>
 
     <h1>Account Balance</h1>
-    <p>Please first select the account you would like to transfer funds to. Then, enter in the
-        amount of funds to transfer.</p>
+    <p>Please enter in the amount of funds to transfer.</p>
 
     <form action="transfer" method="post">
         <input type="hidden" name="action" value="transferFunds">
-        
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="checking" id="checking">Checking:&nbsp;&nbsp; ${account.AccountType.CHECKING}
-                </label>
+        <div class="form-group">
+            <label for="checking" class="control-label col-sm-2">Checking:  $</label>
+            <div class="col-sm-4">
+                <input type="text" name="checking" class="form-control" id="checking" value="${account.checking}" placeholder="">
             </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="savings" id="savings">Savings:&nbsp;&nbsp; ${account.AccountType.SAVINGS}
-                </label>
+        </div>
+        <div class="form-group">
+            <label for="savings" class="control-label col-sm-2">Savings:  $</label>
+            <div class="col-sm-4">
+                <input type="text" name="savings" class="form-control" id="savings" value="${account.savings}" placeholder="">
             </div>
-            <h3>Balance:&nbsp  ${account.balance}</h3>
+        </div>
+        <div class="form-group">
+            <label for="balance" class="control-label col-sm-2">Balance:  $</label>
+            <div class="col-sm-4">
+                <input type="text" name="balance" class="form-control" id="balance" value="${account.balance}" placeholder="">
+            </div>
+        </div>
         <div class="form-group form-inline">
             <label class="sr-only" for="transferAmount">Amount (in dollars)</label>
             <div class="input-group">

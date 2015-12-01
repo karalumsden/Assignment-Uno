@@ -21,7 +21,7 @@
     <div class="container border">
      <div class="table-responsive">
       <table class="table table-hover">
-          <caption>Please make sure all information below is accurate.</caption>
+          <caption>${sessionScope.user.firstName} Please make sure all information below is accurate.</caption>
           <tr>
               <th>First Name: </th><td>${sessionScope.user.firstName}</td>
           </tr>
