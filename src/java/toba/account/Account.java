@@ -55,4 +55,5 @@ public class Account implements Serializable {
     public void setBalance(Double balance) {
         this.balance = balance;
     }
+
 }

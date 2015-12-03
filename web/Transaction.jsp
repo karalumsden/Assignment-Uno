@@ -19,21 +19,31 @@
     <form action="transfer" method="post">
         <input type="hidden" name="action" value="transferFunds">
         <div class="form-group">
-            <p>Checking:  ${account.aName.getBalance()}</p>
-            <p>Savings:  ${account.aName.getBalance()}</p>
-            <p>Balance:  ${account.balance}</p>
-            
-        <div class="form-group form-inline">
-            <label class="sr-only" for="transferAmount">Amount (in dollars)</label>
-            <div class="input-group">
-                <div class="input-group-addon">$</div>
-                <input type="text" class="form-control" name="transferAmount" id="transferAmount" placeholder="Amount">
-                <div class="input-group-addon">.00</div>
+            <p>Checking:  ${session.account.checking.getBalance()}</p>
+            <p>Savings:  ${session.account.saving.getBalance()}</p>
+            <p>Balance:  ${session.account.balance}</p>
+
+            <div class="form-group form-inline">
+                Transfer from:
+                <select class="form-control">
+                    <option name="checking" id="transferFrom">Checking</option>
+                    <option name="savings" id="transferFrom">Savings</option>
+                </select>
+                Transfer to:
+                <select class="form-control">
+                    <option name="checking" id="transferTo">Checking</option>
+                    <option name="savings" id="transferTo">Savings</option>
+                </select>
+                <label class="sr-only" for="transferAmount">Amount (in dollars)</label>
+                <div class="input-group">
+                    <div class="input-group-addon">$</div>
+                    <input type="text" class="form-control" name="transferAmount" id="transferAmount" placeholder="Amount">
+                    <div class="input-group-addon">.00</div>
+                </div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Transfer cash</button><br><br>
-    </form>
+            <button type="submit" class="btn btn-primary">Transfer cash</button><br><br>
+            </form>
 
-</div> <!-- /container -->          
+        </div> <!-- /container -->          
 
-<c:import url="/includes/footer.jsp" />
+        <c:import url="/includes/footer.jsp" />

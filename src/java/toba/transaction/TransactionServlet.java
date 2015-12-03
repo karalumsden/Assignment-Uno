@@ -3,6 +3,7 @@ package toba.transaction;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import java.util.Date;
 import toba.business.User;
 import toba.data.UserDB;
 import toba.account.Account;
@@ -29,38 +30,33 @@ public class TransactionServlet extends HttpServlet {
         } 
         else if (action.equals("transferFunds")) {
             // get parameters from the request
-            String transferAmount = request.getParameter("transferAmount");
-            Double amt = Double.parseDouble(transferAmount);
+            String transactionAmt = request.getParameter("transferAmount");
+            Double amt = Double.parseDouble(transactionAmt);
+            String transferFrom = request.getParameter("transferFrom");
+            String transferTo = request.getParameter("transferTo");
+            Date date = new Date();
             
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
             Account account = (Account) session.getAttribute("account");
             
-            Transaction transaction = new Transaction();
+            Transaction transaction = new Transaction(user, account, amt, date);
             
             // transfer using the credit/debit methods 
             String message;
-            if (transferAmount == null || transferAmount.isEmpty()) {
+            if (amt == 0) {
                 message = "Please enter in a transfer amount.";
                 url = "/Transaction.jsp";
             }
             else if (amt < 0) {
                 message = "Your debit transfer was successful.";
                 url = "/Account_activity.jsp";
-                // Can't figure out how to pass amt to the method keep getting an error?
-                // Account.debit(amt);
-                // AccountDB.insert(checking, savings);
-                // Transaction.setTransactionItems(transaction);
-                // Transaction.setTransactionDate(Transaction.getTransactionDate());
+                account.debit(amt);
+                
             } else {
                 message = "Your credit transfer was successful.";
                 url = "/Account_activity.jsp";
-                // Can't figure out how to pass amt to the method keep getting an error?
-                // I don't understand how to pass the type that the user selected a checkbox for?
-                // AccountDB.credit();
-                // AccountDB.insert(checking, savings);
-                // Transaction.setTransactionItems(transaction);
-                // Transaction.setTransactionDate(Transaction.getTransactionDate());
+                account.credit(amt);
             }
             request.setAttribute("user", user);
             request.setAttribute("account", account);
