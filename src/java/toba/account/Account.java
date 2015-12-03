@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import toba.business.User;
 
-
 @Entity
 public class Account implements Serializable {
 
@@ -15,12 +14,16 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long accountId;
 
-    public enum AccountType {CHECKING, SAVINGS};
+    public enum AccountType {
+
+        CHECKING, SAVINGS
+    };
     private AccountType aName;
     private Double balance;
     private User user;
 
-    public Account(){}
+    public Account() {
+    }
 
     public Account(User user, AccountType type, double startingBalance) {
         this.balance = startingBalance;

@@ -39,7 +39,6 @@ public class TransactionServlet extends HttpServlet {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
             Account account = (Account) session.getAttribute("account");
-            
             Transaction transaction = new Transaction(user, account, amt, date);
             
             // transfer using the credit/debit methods 
@@ -58,9 +57,9 @@ public class TransactionServlet extends HttpServlet {
                 url = "/Account_activity.jsp";
                 account.credit(amt);
             }
-            request.setAttribute("user", user);
-            request.setAttribute("account", account);
-            request.setAttribute("transaction", transaction);
+            session.setAttribute("user", user);
+            session.setAttribute("account", account);
+            session.setAttribute("transaction", transaction);
             request.setAttribute("message", message);
         }
         getServletContext()
