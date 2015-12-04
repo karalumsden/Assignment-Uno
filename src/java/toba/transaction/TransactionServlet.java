@@ -14,7 +14,7 @@ public class TransactionServlet extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
         String url = "/Transaction.jsp";
-        
+
         // get current action
         String action = request.getParameter("action");
         if (action == null) {
@@ -23,9 +23,8 @@ public class TransactionServlet extends HttpServlet {
 
         // perform action and set URL to appropriate page
         if (action.equals("submit")) {
-            url = "/Transaction.jsp"; 
-        } 
-        else if (action.equals("transferFunds")) {
+            url = "/Transaction.jsp";
+        } else if (action.equals("transferFunds")) {
             // get parameters from the request
             String transactionAmt = request.getParameter("transferAmount");
             Double amt = Double.parseDouble(transactionAmt);
@@ -33,35 +32,34 @@ public class TransactionServlet extends HttpServlet {
             User user = (User) session.getAttribute("user");
             String transferFrom = request.getParameter("transferFrom");
             String transferTo = request.getParameter("transferTo");
-            
+            String message;
+
             if (transferFrom.equals("checking")) {
                 Account from = user.getChecking();
                 Account to = user.getSavings();
                 from.debit(amt);
                 to.credit(amt);
-            } else {
+                UserDB.update(user);
+                url = "/Account_activity.jsp";
+            } else if (transferFrom.equals("savings")) {
                 Account from = user.getSavings();
                 Account to = user.getChecking();
                 from.debit(amt);
                 to.credit(amt);
-            }
-                        
-            // transfer using the credit/debit methods 
-            String message;
-            if (amt == 0) {
-                message = "Please enter in a transfer amount.";
-                url = "/Transaction.jsp";
-            } else {
-                message = "Your transfer was successful.";
                 UserDB.update(user);
                 url = "/Account_activity.jsp";
+            } else if (transferFrom.isEmpty() || transferTo.isEmpty()) {
+                message = "Please select which accounts you would like to transfer from and to in order to proceed.";
+                url = "/Transaction.jsp";
+            } else {
+                message = "Please enter a transfer amount.";
+                url = "/Transaction.jsp";
             }
-            
-            session.setAttribute("user", user);
-            request.setAttribute("message", message);
+        session.setAttribute("user", user);
+        request.setAttribute("message", message);
         }
         getServletContext()
                 .getRequestDispatcher(url)
                 .forward(request, response);
-    }    
+    }
 }

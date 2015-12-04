@@ -23,8 +23,8 @@ public class User implements Serializable {
     private String email;
     private String username;
     private String password;
-    private Account checking;
-    private Account savings;
+    public Account checking;
+    public Account savings;
 
     public User() {
         firstName = "";
