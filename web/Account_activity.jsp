@@ -2,24 +2,43 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/includes/header.html" />
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
         <h1>Account Activity</h1>
         <c:if test = "${user == null}">
-        <p>Hey There! You're not logged in. Don't have an account yet? Sign up!</p>
-        <p><a class="btn btn-primary btn-lg" href="New_customer.jsp" role="button">Sign me up! &raquo;</a></p>
+            <p>Hey There! You're not logged in. Don't have an account yet? Sign up!</p>
+            <p><a class="btn btn-primary btn-lg" href="New_customer.jsp" role="button">Sign me up! &raquo;</a></p>
         </c:if>
         <c:if test = "${user != null}">
-        <p>Howdy ${sessionScope.user.firstName} ${sessionScope.user.lastName}, you are logged in!</p>
+            <p>Howdy ${sessionScope.user.firstName} ${sessionScope.user.lastName}, you are logged in!</p>
         </c:if>
-      </div>
     </div>
+</div>
 
-    <div class="container">
+<div class="container">
 
-        <!-- add a C:forEach here to display all transaction and account info?-->
-        
-    </div> <!--end of container-->
+    <h1>Your Recent Activity</h1>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Transaction Type</th>
+            <th>Account</th>
+            <th>Amount</th>
+            <th></th>
+        </tr>
+
+        <c:forEach var="item" items="${account.transactions}">
+            <tr>
+                <td><input type=text name="date" value="<c:out value='${transactions.date}'/>" id="date"></td>
+                <td><c:out value='${transactions.transaction.TransactionTypes}'/></td>
+                <td>${transactions.getAccountType()}</td>
+                <td>${transactions.balanceCurrencyFormat}</td>
+            </tr>
+        </c:forEach>
+    </table>
+
+</div> <!--end of container-->
 
 <c:import url="/includes/footer.jsp" />
