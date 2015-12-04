@@ -19,9 +19,8 @@
     <form action="transfer" method="post">
         <input type="hidden" name="action" value="transferFunds">
         <div class="form-group">
-            <p>Checking:  ${account.getBalance()}</p>
-            <p>Savings:  ${account.getBalance()}</p>
-            <p>Balance:  ${account.balance}</p>
+            <p>Checking:  ${user.checking.balance}</p>
+            <p>Savings:  ${user.savings.balance}</p>
 
             <div class="form-group form-inline">
                 Transfer from:

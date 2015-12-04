@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import toba.account.Account;
 
 @Entity
 public class User implements Serializable {
@@ -22,6 +23,8 @@ public class User implements Serializable {
     private String email;
     private String username;
     private String password;
+    private Account checking;
+    private Account savings;
 
     public User() {
         firstName = "";
@@ -34,10 +37,12 @@ public class User implements Serializable {
         email = "";
         username = lastName + zip;
         password = "welcome1";
+        this.checking = new Account();        
+        this.savings = new Account();
     }
 
     public User(String firstName, String lastName, String phone, String address, 
-            String city, String state, String zip, String email) {
+            String city, String state, String zip, String email, Account savings, Account checking) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
@@ -48,6 +53,8 @@ public class User implements Serializable {
         this.email = email;
         username = lastName + zip;
         password = "welcome1";
+        this.checking = checking;
+        this.savings = savings;
     }
     
     public Long getUserId() {
@@ -138,5 +145,12 @@ public class User implements Serializable {
         this.password = password;
     }  
 
-    
+    public Account getChecking() {
+        return checking;
+    }
+
+    public Account getSavings() {
+        return savings;
+    }
+  
 }
