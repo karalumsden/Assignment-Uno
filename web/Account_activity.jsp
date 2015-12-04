@@ -20,7 +20,7 @@
 
     <h1>Your Recent Activity</h1>
 
-    <table>
+    <table class="table">
         <tr>
             <th>Date</th>
             <th>Transaction Type</th>
