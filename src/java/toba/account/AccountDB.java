@@ -7,7 +7,6 @@ import javax.persistence.TypedQuery;
 
 
 import toba.data.DBUtil;
-import toba.business.User;
 
 public class AccountDB {
     
@@ -29,8 +28,7 @@ public class AccountDB {
     public static Account findByUserId(Long userId, String accountType){
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         String qString = "SELECT u FROM Account u " +
-                         "WHERE u.userId = :userId" +
-                         "AND u.AccountType = :accountType";
+                         "WHERE u.userId = :userId AND u.AccountType = :accountType";
         
         TypedQuery<Account> q = em.createQuery(qString, Account.class);
         q.setParameter("userId", userId);

@@ -54,6 +54,7 @@
           </tr>
      </table>
      </div>
+     <p><a class="btn btn-primary btn-sm" href="Transaction.jsp" role="button">Transfer Funds</a>&nbsp;&nbsp;<a class="btn btn-primary btn-sm" href="Account_activity.jsp" role="button">Account Activity</a></p>
     </div> <!-- /container -->
       
 <c:import url="/includes/footer.jsp" />
