@@ -2,9 +2,12 @@ package toba.account;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 
 
 import toba.data.DBUtil;
+import toba.business.User;
 
 public class AccountDB {
     
@@ -22,5 +25,40 @@ public class AccountDB {
             em.close();
         }
     }
+
+    public static Account findByUserId(Long userId, String accountType){
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        String qString = "SELECT u FROM Account u " +
+                         "WHERE u.userId = :userId" +
+                         "AND u.AccountType = :accountType";
+        
+        TypedQuery<Account> q = em.createQuery(qString, Account.class);
+        q.setParameter("userId", userId);
+        q.setParameter("accountType", accountType);
+        Account result = null;
+        try { 
+            result = q.getSingleResult();
+        } catch (NoResultException e) {
+            System.out.println(e);
+        } finally {
+            em.close();
+        }
+        return result;
+    }
     
+     public static void update(Account account) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        trans.begin();       
+        try {
+            em.merge(account);
+            trans.commit();
+        } catch (Exception e) {
+            System.out.println(e);
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
 }
+

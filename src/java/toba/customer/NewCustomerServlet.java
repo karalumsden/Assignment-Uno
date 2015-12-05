@@ -37,7 +37,7 @@ public class NewCustomerServlet extends HttpServlet {
             String email = request.getParameter("email");
         
             // store data in User object
-            User user = new User(firstName, lastName, phone, address, city, state, zip, email, checking, savings);
+            User user = new User(firstName, lastName, phone, address, city, state, zip, email);
             Account checking = new Account(user, Account.AccountType.CHECKING, 0.00);        
             Account savings = new Account(user, Account.AccountType.SAVINGS, 25.00);  
             

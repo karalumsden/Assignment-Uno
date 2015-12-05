@@ -6,6 +6,7 @@ import javax.servlet.http.*;
 import toba.business.User;
 import toba.data.UserDB;
 import toba.account.Account;
+import toba.account.AccountDB;
 
 public class TransactionServlet extends HttpServlet {
 
@@ -32,21 +33,23 @@ public class TransactionServlet extends HttpServlet {
             User user = (User) session.getAttribute("user");
             String transferFrom = request.getParameter("transferFrom");
             String transferTo = request.getParameter("transferTo");
-            String message;
+            String message = "";
 
-            if (transferFrom.equals("checking")) {
-                Account from = user.getChecking();
-                Account to = user.getSavings();
+            if (transferFrom.equals("Checking")) {                
+                Account from = AccountDB.findByUserId(user.getUserId(), "Checking");
+                Account to = AccountDB.findByUserId(user.getUserId(), "Savings");
                 from.debit(amt);
                 to.credit(amt);
-                UserDB.update(user);
+                AccountDB.update(to);
+                AccountDB.update(from);
                 url = "/Account_activity.jsp";
-            } else if (transferFrom.equals("savings")) {
-                Account from = user.getSavings();
-                Account to = user.getChecking();
+            } else if (transferFrom.equals("Savings")) {
+                Account from = AccountDB.findByUserId(user.getUserId(), "Savings");
+                Account to = AccountDB.findByUserId(user.getUserId(), "Checking");
                 from.debit(amt);
                 to.credit(amt);
-                UserDB.update(user);
+                AccountDB.update(to);
+                AccountDB.update(from);
                 url = "/Account_activity.jsp";
             } else if (transferFrom.isEmpty() || transferTo.isEmpty()) {
                 message = "Please select which accounts you would like to transfer from and to in order to proceed.";
