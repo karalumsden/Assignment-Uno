@@ -43,12 +43,61 @@
         <url-pattern>/resetpassword</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>ReportsServlet</servlet-name>
+        <servlet-class>toba.reports.ReportsServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ReportsServlet</servlet-name>
+        <url-pattern>/admin/reports</url-pattern>
+    </servlet-mapping>
+    
+        <servlet>
+        <servlet-name>CheckPasswordServlet</servlet-name>
+        <servlet-class>murach.acount.CheckPasswordServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CheckPasswordServlet</servlet-name>
+        <url-pattern>/check</url-pattern>
+    </servlet-mapping>
+    
     <error-page>
         <error-code>404</error-code>
         <location>/Error_404.jsp</location>
     </error-page>
     
-    
+    <!-- Define security roles -->
+    <security-role>
+        <description>development</description>
+        <role-name>programmer</role-name>
+    </security-role>
+
+    <!-- Restrict access to all files in the /admin folder -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Protected Area</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <!-- Authorize the secourity roles -->
+        <auth-constraint>
+            <role-name>programmer</role-name>
+        </auth-constraint>
+        <!-- Require a secure connection (DON'T NEED FOR THIS ASSIGNMENT)
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint> -->
+    </security-constraint>
+
+    <!-- Use form-based authentication -->
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/admin/login.html</form-login-page>
+            <form-error-page>/admin/login_error.html</form-error-page>
+        </form-login-config>
+    </login-config>
     
     
 </web-app>

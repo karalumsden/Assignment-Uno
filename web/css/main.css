@@ -105,6 +105,12 @@ caption {font-size: 1em;}
     color: rgba(161,195,231,0.8);
 }
 
+.pad_top {
+    padding-top: 0.25em;
+}
+.margin_left {
+    margin-left: 0.5em;
+}
 
 
 

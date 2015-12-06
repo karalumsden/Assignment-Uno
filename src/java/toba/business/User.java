@@ -7,13 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import toba.account.Account;
 import toba.account.AccountDB;
 import toba.transaction.Transaction;
 
 @Entity
 public class User implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
@@ -27,7 +26,7 @@ public class User implements Serializable {
     private String email;
     private String username;
     private String password;
-   
+
     public User() {
         firstName = "";
         lastName = "";
@@ -41,7 +40,7 @@ public class User implements Serializable {
         password = "welcome1";
     }
 
-    public User(String firstName, String lastName, String phone, String address, 
+    public User(String firstName, String lastName, String phone, String address,
             String city, String state, String zip, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -54,7 +53,7 @@ public class User implements Serializable {
         username = lastName + zip;
         password = "welcome1";
     }
-    
+
     public Long getUserId() {
         return userId;
     }
@@ -74,7 +73,7 @@ public class User implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
+
     public String getPhone() {
         return phone;
     }
@@ -82,7 +81,7 @@ public class User implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
+
     public String getAddress() {
         return address;
     }
@@ -90,7 +89,7 @@ public class User implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-    
+
     public String getCity() {
         return city;
     }
@@ -98,7 +97,7 @@ public class User implements Serializable {
     public void setCity(String city) {
         this.city = city;
     }
-    
+
     public String getState() {
         return state;
     }
@@ -106,7 +105,7 @@ public class User implements Serializable {
     public void setState(String state) {
         this.state = state;
     }
-    
+
     public String getZip() {
         return zip;
     }
@@ -135,22 +134,22 @@ public class User implements Serializable {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password){
         this.password = password;
-    }  
+    }
 
-    public List<Transaction> getTransactionHistory(){
-        
+    public List<Transaction> getTransactionHistory() {
+
         ArrayList<Transaction> checking = AccountDB
-                                    .findByUserId(this.getUserId(), "CHECKING")
-                                    .getList();
-        
+                .findByUserId(this.getUserId(), "CHECKING")
+                .getList();
+
         List<Transaction> allTransactions = new ArrayList<Transaction>(checking);
 
         ArrayList<Transaction> savings = AccountDB
-                                    .findByUserId(this.getUserId(), "SAVINGS")
-                                    .getList();
-        
+                .findByUserId(this.getUserId(), "SAVINGS")
+                .getList();
+
         allTransactions.addAll(savings);
         return allTransactions;
     }

@@ -1,7 +1,7 @@
-
 package toba.customer;
 
 import java.io.*;
+import java.security.NoSuchAlgorithmException;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -9,6 +9,7 @@ import toba.business.User;
 import toba.data.UserDB;
 import toba.account.Account;
 import toba.account.AccountDB;
+import toba.password.PasswordUtil;
 
 public class NewCustomerServlet extends HttpServlet {
 
@@ -22,9 +23,9 @@ public class NewCustomerServlet extends HttpServlet {
         if (action == null) {
             action = "submit"; // default action
         }
-        
+
         if (action.equals("submit")) {
-            url = "/New_customer.jsp"; 
+            url = "/New_customer.jsp";
         } else if (action.equals("newCustomer")) {
             // get properties
             String firstName = request.getParameter("firstName");
@@ -35,17 +36,17 @@ public class NewCustomerServlet extends HttpServlet {
             String state = request.getParameter("state");
             String zip = request.getParameter("zip");
             String email = request.getParameter("email");
-        
+
             // store data in User object
             User user = new User(firstName, lastName, phone, address, city, state, zip, email);
-            Account checking = new Account(user, Account.AccountType.CHECKING, 0.00);        
-            Account savings = new Account(user, Account.AccountType.SAVINGS, 25.00);  
-            
+            Account checking = new Account(user, Account.AccountType.CHECKING, 0.00);
+            Account savings = new Account(user, Account.AccountType.SAVINGS, 25.00);
+
             // validate
             String message = "";
-            if (firstName == null || lastName == null || phone == null || address == null || city == null || 
-                    state == null || zip == null || email == null || firstName.isEmpty() || lastName.isEmpty() || 
-                    phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty() || zip.isEmpty() || email.isEmpty()) {
+            if (firstName == null || lastName == null || phone == null || address == null || city == null
+                    || state == null || zip == null || email == null || firstName.isEmpty() || lastName.isEmpty()
+                    || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty() || zip.isEmpty() || email.isEmpty()) {
                 message = "Please fill out all form fields.";
                 url = "/New_customer.jsp";
             } else {
@@ -55,12 +56,28 @@ public class NewCustomerServlet extends HttpServlet {
                 AccountDB.insert(checking);
                 AccountDB.insert(savings);
             }
+
+            String hashedPassword;
+            String salt = "";
+            String saltedAndHashedPassword;
+            try {
+                hashedPassword = PasswordUtil.hashPassword(user.getPassword());
+                salt = PasswordUtil.getSalt();
+                saltedAndHashedPassword = PasswordUtil.hashAndSaltPassword(user.getPassword());
+
+            } catch (NoSuchAlgorithmException ex) {
+                hashedPassword = ex.getMessage();
+                saltedAndHashedPassword = ex.getMessage();
+            }
+            
+            user.setPassword(saltedAndHashedPassword);
+
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             request.setAttribute("message", message);
         }
         getServletContext()
-                        .getRequestDispatcher(url)
-                        .forward(request, response);
+                .getRequestDispatcher(url)
+                .forward(request, response);
     }
 }
