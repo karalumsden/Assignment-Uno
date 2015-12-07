@@ -69,6 +69,7 @@ public class UserDB {
             em.close();
         }
     }
+    
 
     public static boolean usernameExists(String username) {
         User u = selectUser(username);   

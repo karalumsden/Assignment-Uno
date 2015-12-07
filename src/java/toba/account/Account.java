@@ -3,7 +3,6 @@ package toba.account;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -35,8 +34,7 @@ public class Account implements Serializable {
     
     @ManyToOne
     private User user;
-    
-    
+      
     @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
     private ArrayList<Transaction> transactions;
     

@@ -50,7 +50,8 @@
             </div>
             <button type="submit" class="btn btn-primary">Transfer cash</button><br><br>
             </form>
+        </div>
 
-        </div> <!-- /container -->          
+</div> <!-- /container -->          
 
-        <c:import url="/includes/footer.jsp" />
+<c:import url="/includes/footer.jsp" />

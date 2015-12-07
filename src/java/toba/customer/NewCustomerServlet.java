@@ -51,26 +51,25 @@ public class NewCustomerServlet extends HttpServlet {
                 url = "/New_customer.jsp";
             } else {
                 message = "";
+                String hashedPassword;
+                String salt = "";
+                String saltedAndHashedPassword;
+                try {
+                    hashedPassword = PasswordUtil.hashPassword(user.getPassword());
+                    salt = PasswordUtil.getSalt();
+                    saltedAndHashedPassword = PasswordUtil.hashAndSaltPassword(user.getPassword());
+
+                } catch (NoSuchAlgorithmException ex) {
+                    hashedPassword = ex.getMessage();
+                    saltedAndHashedPassword = ex.getMessage();
+                }
+
+                user.setPassword(saltedAndHashedPassword);
                 url = "/Success.jsp";
                 UserDB.insert(user);
                 AccountDB.insert(checking);
                 AccountDB.insert(savings);
             }
-
-            String hashedPassword;
-            String salt = "";
-            String saltedAndHashedPassword;
-            try {
-                hashedPassword = PasswordUtil.hashPassword(user.getPassword());
-                salt = PasswordUtil.getSalt();
-                saltedAndHashedPassword = PasswordUtil.hashAndSaltPassword(user.getPassword());
-
-            } catch (NoSuchAlgorithmException ex) {
-                hashedPassword = ex.getMessage();
-                saltedAndHashedPassword = ex.getMessage();
-            }
-            
-            user.setPassword(saltedAndHashedPassword);
 
             HttpSession session = request.getSession();
             session.setAttribute("user", user);

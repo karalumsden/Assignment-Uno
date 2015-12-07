@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 
             // Validate!
             if (username.equals("jsmith@toba.com") && password.equals("letmein")) {
-                url = "/Account_activity.jsp";
+                url = "/index.jsp";
             } else {
                 url = "/Login_failure.jsp";
             }

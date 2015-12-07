@@ -26,7 +26,6 @@
             <th>Transaction Type</th>
             <th>Account</th>
             <th>Amount</th>
-            <th></th>
         </tr>
 
         <c:forEach var="item" items="${user.transactions}">

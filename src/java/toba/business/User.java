@@ -2,6 +2,7 @@ package toba.business;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,7 @@ public class User implements Serializable {
     private String email;
     private String username;
     private String password;
+  
 
     public User() {
         firstName = "";
@@ -137,7 +139,7 @@ public class User implements Serializable {
     public void setPassword(String password){
         this.password = password;
     }
-
+    
     public List<Transaction> getTransactionHistory() {
 
         ArrayList<Transaction> checking = AccountDB
@@ -153,4 +155,6 @@ public class User implements Serializable {
         allTransactions.addAll(savings);
         return allTransactions;
     }
+    
+    
 }

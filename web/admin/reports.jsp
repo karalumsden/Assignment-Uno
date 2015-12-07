@@ -1,4 +1,8 @@
 <!doctype html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="now" value="<%=new java.util.Date()%>" />
+
 <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
@@ -56,12 +60,29 @@
         </div>
 
         <div class="container">
-            <h2>This page displays all the users who have registered during the current month.</h2>
+            <h1>Registered Users</h1>
+
+            <table class="table">
+                <tr>
+                    <th>Date Added</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+
+                <c:forEach items="${user.user}" var="user">
+                    <tr>  
+                        <td>${now}</td>
+                        <td>${user.firstName}</td>
+                        <td>${user.lastName}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+
+            <h2>User Table</h2>
+            <p><a href="reportsServlet">Return as an XLS file</a></p>
+
         </div>    
 
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-        <c:set var="now" value="<%=new java.util.Date()%>" />
         <footer>
             <p>&copy; Toba Company. Today's date is: <fmt:formatDate type="date" 
                             value="${now}" /></p>
