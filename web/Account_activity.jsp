@@ -24,15 +24,14 @@
         <tr>
             <th>Date</th>
             <th>Transaction Type</th>
-            <th>Account</th>
             <th>Amount</th>
         </tr>
 
         <c:forEach var="item" items="${user.transactionHistory}">
             <tr>
-                <td><input type=text name="date" value="<c:out value='${item.date}'/>" id="date"></td>
+                <td>${item.date}</td>
                 <td>${item.type}</td>
-                <td>${item.transactionAmount}</td>
+                <td>${item.transAmtCurrencyFormat}</td>
             </tr>
         </c:forEach>
     </table>

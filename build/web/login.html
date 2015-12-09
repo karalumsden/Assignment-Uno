@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Toba Login</title>
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link href="img/favicon.ico" type="image/x-icon" rel="shortcut icon">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body class="loginBody">
+        <div class="loginLogo"><img class="loginImg" src="img/tobaLogoLogin.png" alt="Toba Logo"></div>
+        <div class="logoTitle"><p>Titan Online Banking Application</p>
+        <div class="loginContainer">
+            <form action="login" method="post">
+                <input type="hidden" name="action" value="loginUser">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter username/email" name="username" autofocus required>
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" required>
+                    <p><a href="New_customer.jsp" class="right">New Customer? Sign up here</a><br>
+                    <a href="Password_reset.jsp" class="right">Reset Password</a></p>
+                </div>
+                <button type="submit" id="submit" class="btn btn-primary btn-med" value="Login">Login</button>
+            </form>
+        </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+    </body>
+</html>

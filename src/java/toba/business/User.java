@@ -140,14 +140,14 @@ public class User implements Serializable {
         this.password = password;
     }
     
-    public double getCheckingBalance(){
+    public String getCheckingBalance(){
         Account checking = this.getAccount(Account.AccountType.CHECKING);
-        return checking.getBalance();
+        return checking.getBalanceCurrencyFormat();
     }
     
-    public double getSavingsBalance(){
+    public String getSavingsBalance(){
         Account savings = this.getAccount(Account.AccountType.SAVINGS);
-        return savings.getBalance();
+        return savings.getBalanceCurrencyFormat();
     }
     
     public List<Transaction> getTransactionHistory() {
@@ -161,6 +161,7 @@ public class User implements Serializable {
         allTransactions.addAll(savings);
         return allTransactions;
     }
+    
     
     public String getSalt() {
         return salt;

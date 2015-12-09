@@ -1,6 +1,8 @@
 package toba.transaction;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,27 +27,11 @@ public class Transaction implements Serializable {
     private Date date;
     private TransactionTypes type;
 
-    public TransactionTypes getType() {
-        return type;
-    }
-
-    public void setType(TransactionTypes type) {
-        this.type = type;
-    }
-    
-    public void setTransactionAmount(double val){
-        this.transactionAmt = val;
-    }
-    
-    public double getTransactionAmount(){
-        return this.transactionAmt;
-    }
-    
     public Transaction(){}
 
     public Transaction(Double transactionAmt, TransactionTypes type) {
         this.transactionAmt = transactionAmt;
-        this.date = new Date();
+        this.date = new Date();      
         this.type = type;
     }
 
@@ -67,11 +53,34 @@ public class Transaction implements Serializable {
         this.transactionAmt = transactionAmt;
     } 
     
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        String date = new SimpleDateFormat("MM-dd-yyyy").format(this.date);
+        return date; 
     }
 
     public void setDate(Date date) {
         this.date = date;
     } 
+    
+    public TransactionTypes getType() {
+        return type;
+    }
+
+    public void setType(TransactionTypes type) {
+        this.type = type;
+    }
+    
+    public void setTransactionAmount(double val){
+        this.transactionAmt = val;
+    }
+    
+    public double getTransactionAmount(){
+        return this.transactionAmt;
+    }
+    
+    public String getTransAmtCurrencyFormat() {
+        NumberFormat currency = NumberFormat.getCurrencyInstance();
+        return currency.format(this.getTransactionAmount());
+    }
+   
 }
