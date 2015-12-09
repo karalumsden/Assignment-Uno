@@ -36,16 +36,16 @@ public class TransactionServlet extends HttpServlet {
             String message = "";
 
             if (transferFrom.equals("checking")) {                
-                Account from = AccountDB.findByUserId(user.getUserId(), "CHECKING");
-                Account to = AccountDB.findByUserId(user.getUserId(), "SAVINGS");
+                Account from = user.getAccount(Account.AccountType.CHECKING);
+                Account to = user.getAccount(Account.AccountType.SAVINGS);
                 from.debit(amt);
                 to.credit(amt);
                 AccountDB.update(to);
                 AccountDB.update(from);
                 url = "/Account_activity.jsp";
             } else if (transferFrom.equals("savings")) {
-                Account from = AccountDB.findByUserId(user.getUserId(), "SAVINGS");
-                Account to = AccountDB.findByUserId(user.getUserId(), "CHECKING");
+                Account from = user.getAccount(Account.AccountType.SAVINGS);
+                Account to = user.getAccount(Account.AccountType.CHECKING);
                 from.debit(amt);
                 to.credit(amt);
                 AccountDB.update(to);

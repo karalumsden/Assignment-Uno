@@ -8,7 +8,7 @@
         <h1>Ready to make a transfer?</h1>
         <c:if test = "${user == null}">
             <p>Hey There! You're not logged in. You can't transfer money until we know who you are!</p>
-            <p><a class="btn btn-primary btn-lg" href="New_customer.jsp" role="button">Login</a></p>
+            <p><a class="btn btn-primary btn-lg" href="login.html" role="button">Login</a></p>
         </c:if>
         <c:if test = "${user != null}">
             <p>Howdy ${sessionScope.user.firstName} ${sessionScope.user.lastName}, you are logged in!</p>
@@ -27,8 +27,8 @@
     <form action="transfer" method="post">
         <input type="hidden" name="action" value="transferFunds">
         <div class="form-group">
-            <p>Checking:  ${checking.balance}</p>
-            <p>Savings:  ${savings.balance}</p>
+            <p>Checking:  ${user.checkingBalance}</p>
+            <p>Savings:  ${user.savingsBalance}</p>
 
             <div class="form-group form-inline">
                 Transfer from:

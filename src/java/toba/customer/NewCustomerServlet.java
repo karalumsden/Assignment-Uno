@@ -55,9 +55,10 @@ public class NewCustomerServlet extends HttpServlet {
                 String salt = "";
                 String saltedAndHashedPassword;
                 try {
-                    hashedPassword = PasswordUtil.hashPassword(user.getPassword());
                     salt = PasswordUtil.getSalt();
-                    saltedAndHashedPassword = PasswordUtil.hashAndSaltPassword(user.getPassword());
+                    saltedAndHashedPassword = PasswordUtil
+                                                .hashPassword(user.getPassword() + salt);
+                    user.setSalt(salt);
 
                 } catch (NoSuchAlgorithmException ex) {
                     hashedPassword = ex.getMessage();

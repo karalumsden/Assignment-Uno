@@ -8,9 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Temporal;
 import javax.persistence.Id;
 
-import toba.business.User;
-import toba.account.Account;
-
 @Entity
 public class Transaction implements Serializable {
     
@@ -27,6 +24,22 @@ public class Transaction implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date date;
     private TransactionTypes type;
+
+    public TransactionTypes getType() {
+        return type;
+    }
+
+    public void setType(TransactionTypes type) {
+        this.type = type;
+    }
+    
+    public void setTransactionAmount(double val){
+        this.transactionAmt = val;
+    }
+    
+    public double getTransactionAmount(){
+        return this.transactionAmt;
+    }
     
     public Transaction(){}
 

@@ -2,12 +2,12 @@ package toba.business;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import toba.account.Account;
 import toba.account.AccountDB;
 import toba.transaction.Transaction;
 
@@ -27,7 +27,7 @@ public class User implements Serializable {
     private String email;
     private String username;
     private String password;
-  
+    private String salt;
 
     public User() {
         firstName = "";
@@ -140,21 +140,41 @@ public class User implements Serializable {
         this.password = password;
     }
     
+    public double getCheckingBalance(){
+        Account checking = this.getAccount(Account.AccountType.CHECKING);
+        return checking.getBalance();
+    }
+    
+    public double getSavingsBalance(){
+        Account savings = this.getAccount(Account.AccountType.SAVINGS);
+        return savings.getBalance();
+    }
+    
     public List<Transaction> getTransactionHistory() {
 
-        ArrayList<Transaction> checking = AccountDB
-                .findByUserId(this.getUserId(), "CHECKING")
-                .getList();
+        ArrayList<Transaction> checking = this.getAccount(Account.AccountType.CHECKING).getList();
 
         List<Transaction> allTransactions = new ArrayList<Transaction>(checking);
 
-        ArrayList<Transaction> savings = AccountDB
-                .findByUserId(this.getUserId(), "SAVINGS")
-                .getList();
+        ArrayList<Transaction> savings = this.getAccount(Account.AccountType.SAVINGS).getList();
 
         allTransactions.addAll(savings);
         return allTransactions;
     }
     
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
     
+    public Account getAccount(Account.AccountType type){
+        for(Account a: AccountDB.findByUserId(this.getUserId(), null)){
+            if (a.getAccountType().equals(type))
+                return a;
+        }
+        return null;
+    }
 }

@@ -1,10 +1,17 @@
 package toba.login;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import toba.business.User;
+import toba.data.UserDB;
+import toba.password.PasswordUtil;
 
 public class LoginServlet extends HttpServlet {
 
@@ -27,11 +34,23 @@ public class LoginServlet extends HttpServlet {
             String password = request.getParameter("password");
 
             // Validate!
-            if (username.equals("jsmith@toba.com") && password.equals("letmein")) {
+            User actualUser = UserDB.selectUser(username);
+            String saltedPwd = "";
+            try {
+                saltedPwd = PasswordUtil.hashPassword(password + actualUser.getSalt());
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            if (username.equals(actualUser.getUsername()) 
+                    && saltedPwd.equals(actualUser.getPassword())) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", actualUser);
                 url = "/index.jsp";
             } else {
                 url = "/Login_failure.jsp";
             }
+            
             
             getServletContext()
                         .getRequestDispatcher(url)

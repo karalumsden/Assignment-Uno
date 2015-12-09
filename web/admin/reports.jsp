@@ -55,7 +55,6 @@
         <div class="jumbotron">
             <div class="container">
                 <h1>Reports</h1>
-                <p>This feature has not been implemented yet.</p>
             </div>
         </div>
 
@@ -68,14 +67,7 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                 </tr>
-
-                <c:forEach items="${user.user}" var="user">
-                    <tr>  
-                        <td>${now}</td>
-                        <td>${user.firstName}</td>
-                        <td>${user.lastName}</td>
-                    </tr>
-                </c:forEach>
+                
             </table>
 
             <h2>User Table</h2>

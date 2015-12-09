@@ -28,12 +28,11 @@
             <th>Amount</th>
         </tr>
 
-        <c:forEach var="item" items="${user.transactions}">
+        <c:forEach var="item" items="${user.transactionHistory}">
             <tr>
                 <td><input type=text name="date" value="<c:out value='${item.date}'/>" id="date"></td>
-                <td><c:out value='${item.TransactionTypes}'/></td>
-                <td>${item.getAccountType()}</td>
-                <td>${item.balanceCurrencyFormat}</td>
+                <td>${item.type}</td>
+                <td>${item.transactionAmount}</td>
             </tr>
         </c:forEach>
     </table>
