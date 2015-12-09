@@ -55,6 +55,7 @@ public class User implements Serializable {
         username = lastName + zip;
         password = "welcome1";
     }
+    
 
     public Long getUserId() {
         return userId;
@@ -178,4 +179,5 @@ public class User implements Serializable {
         }
         return null;
     }
+      
 }

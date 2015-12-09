@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
+import toba.business.User;
 
 
 @WebServlet("/reportsServlet")
@@ -17,6 +18,9 @@ public class ReportsServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, 
             HttpServletResponse response)
             throws IOException, ServletException {
+        
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
         // create the workbook, its worksheet, and its title row
         Workbook workbook = new HSSFWorkbook();
@@ -36,7 +40,7 @@ public class ReportsServlet extends HttpServlet {
             ConnectionPool pool = ConnectionPool.getInstance();
             Connection connection = pool.getConnection();
             Statement statement = connection.createStatement();
-            String query = "SELECT * FROM User ORDER BY userId";    
+            String query = "SELECT username, firstName, lastName, email FROM toba.USER;";    
             ResultSet results = statement.executeQuery(query);
             
             // create the spreadsheet rows

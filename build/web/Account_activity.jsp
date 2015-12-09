@@ -7,8 +7,8 @@
     <div class="container">
         <h1>Account Activity</h1>
         <c:if test = "${user == null}">
-            <p>Hey There! You're not logged in. Don't have an account yet? Sign up!</p>
-            <p><a class="btn btn-primary btn-lg" href="New_customer.jsp" role="button">Sign me up! &raquo;</a></p>
+            <p>Hey There! You're not logged in.</p>
+            <p><a class="btn btn-primary btn-lg" href="login.html" role="button">Login &raquo;</a></p>
         </c:if>
         <c:if test = "${user != null}">
             <p>Howdy ${sessionScope.user.firstName} ${sessionScope.user.lastName}, you are logged in!</p>

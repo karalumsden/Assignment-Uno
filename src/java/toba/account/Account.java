@@ -90,4 +90,5 @@ public class Account implements Serializable {
     public ArrayList<Transaction> getList() {
         return transactions;
     }
+    
 }

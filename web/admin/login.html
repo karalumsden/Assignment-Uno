@@ -32,9 +32,7 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="../index.jsp">Home <span class="sr-only">(current)</span></a></li>
                         <li><a href="../Account_activity.jsp">Account Activity</a></li>
-                        <li><a href="../New_customer.jsp">New Customer</a></li>
                         <li><a href="../Transaction.jsp">Transfer Funds</a></li>
-                        <li><a href="../Success.jsp">Success</a></li>
                         <li><a href="index.jsp">Administration</a></li>
                     </ul>
                     <form class="navbar-form navbar-right" role="search">
