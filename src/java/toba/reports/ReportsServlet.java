@@ -18,9 +18,6 @@ public class ReportsServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, 
             HttpServletResponse response)
             throws IOException, ServletException {
-        
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
 
         // create the workbook, its worksheet, and its title row
         Workbook workbook = new HSSFWorkbook();
@@ -40,14 +37,14 @@ public class ReportsServlet extends HttpServlet {
             ConnectionPool pool = ConnectionPool.getInstance();
             Connection connection = pool.getConnection();
             Statement statement = connection.createStatement();
-            String query = "SELECT username, firstName, lastName, email FROM toba.USER;";    
+            String query = "SELECT username, firstName, lastName, email FROM USER;";    
             ResultSet results = statement.executeQuery(query);
             
             // create the spreadsheet rows
             int i = 3;
             while (results.next()) {
                 row = sheet.createRow(i);
-                row.createCell(0).setCellValue(results.getLong("userId"));
+                row.createCell(0).setCellValue(results.getString("username"));
                 row.createCell(1).setCellValue(results.getString("lastName"));
                 row.createCell(2).setCellValue(results.getString("firstName"));
                 row.createCell(3).setCellValue(results.getString("email"));
