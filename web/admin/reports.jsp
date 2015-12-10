@@ -76,7 +76,7 @@
             </table>
 
             <h2>User Table</h2>
-            <p><a href="reportsServlet">Return as an XLS file</a></p>
+            <p><a href="../reportsServlet">Return as an XLS file</a></p>
 
         </div>    
 
