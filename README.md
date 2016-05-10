@@ -1,5 +1,4 @@
-![Toba Banking Site - Java Class](/web/img/tobaLogo.png)
-# Toba Banking Site - Java Class 
+![Toba Banking Site - Java Class](/web/img/tobaLogo.png)# Toba Banking Site - Java Class 
 Design a Java site that demonstrates various Java techniques. 
 ## What I learned:
 - How to incorporate JSP tags
